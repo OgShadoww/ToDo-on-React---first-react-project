@@ -1,23 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import CreateTodo from "./component/CreateTodo";
+import QuestList from "./component/QuestList";
+import './style/App.css'
+import MyButton from "./UI/button/MyButton";
+import MyModal from "./UI/modal/MyModal";
 
 function App() {
+  let [todo, setTodo] = useState([
+
+  ])
+  let [visible, setVisible] = useState(false)
+
+  let create = (newTodo) => {
+    setTodo([...todo, newTodo])
+    setVisible(false)
+  }
+
+  let [status, setStatus] = useState(false)
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <MyButton onClick={e => setVisible(true)}>
+        Open
+      </MyButton>
+      <MyModal visible={visible} setVisible={setVisible}>
+        <CreateTodo create={create}/>
+      </MyModal>
+      <QuestList status={status} setStatus={setStatus} quest={todo}/>
     </div>
   );
 }
