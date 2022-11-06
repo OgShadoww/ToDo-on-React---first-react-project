@@ -1,19 +1,16 @@
 import React from 'react';
-import cs from './MyModal.module.css'
+import cs from './MyModal.module.scss'
 
 const MyModal = ({children, visible, setVisible}) => {
-
-    let rootClass = [cs.popup]
+    let classes = [cs.modal]
 
     if(visible) {
-        rootClass.push(cs.active)
+        classes.push(cs.active)
     }
 
     return (
-        <div className={rootClass.join(' ')} onClick={e => setVisible(false)}>
-            <div className={cs.content} onClick={e => e.stopPropagation()}>
-                {children}
-            </div>
+        <div className={classes.join(' ')}>
+            {children}
         </div>
     );
 };
